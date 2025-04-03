@@ -3,6 +3,7 @@ package com.example.page
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -153,6 +154,7 @@ fun RepoSearchScreen(viewModel: RepoViewModel = viewModel()) {
                 modifier = Modifier
                     .weight(1f)
                     .height(56.dp)
+                    .background(androidx.compose.ui.graphics.Color.LightGray)
             )
             Spacer(modifier = Modifier.width(8.dp))
             Button(onClick = { viewModel.searchRepos(usernameInput.text) }) {
