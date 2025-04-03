@@ -46,9 +46,6 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 
-// -----------------------------
-// Data classes and API interface
-// -----------------------------
 
 data class GitHubRepo(
     val id: Long,
@@ -78,9 +75,7 @@ object RetrofitInstance {
     val api: GitHubApi = retrofit.create(GitHubApi::class.java)
 }
 
-// -----------------------------
-// UI State using Flow/StateFlow
-// -----------------------------
+
 
 sealed class RepoUiState {
     object Idle : RepoUiState()
@@ -89,9 +84,6 @@ sealed class RepoUiState {
     data class Error(val message: String) : RepoUiState()
 }
 
-// -----------------------------
-// ViewModel: handles API calls and pagination
-// -----------------------------
 
 class RepoViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<RepoUiState>(RepoUiState.Idle)
@@ -123,7 +115,6 @@ class RepoViewModel : ViewModel() {
                     val repos = response.body() ?: emptyList()
                     if (clear) repoAccumulator.clear()
                     repoAccumulator.addAll(repos)
-                    // Check Link header for a "next" page indicator.
                     val linkHeader = response.headers()["Link"]
                     val hasNext = linkHeader?.contains("rel=\"next\"") ?: false
                     currentPage = page
@@ -138,9 +129,7 @@ class RepoViewModel : ViewModel() {
     }
 }
 
-// -----------------------------
-// Composable UI: displays repositories and pagination
-// -----------------------------
+
 
 @Composable
 fun RepoSearchScreen(viewModel: RepoViewModel = viewModel()) {
@@ -157,7 +146,6 @@ fun RepoSearchScreen(viewModel: RepoViewModel = viewModel()) {
             text = "GitHub Repositories",
             style = MaterialTheme.typography.headlineMedium
         )
-        // Input row for username and search button.
         Row(verticalAlignment = Alignment.CenterVertically) {
             BasicTextField(
                 value = usernameInput,
@@ -171,7 +159,6 @@ fun RepoSearchScreen(viewModel: RepoViewModel = viewModel()) {
                 Text(text = "Search")
             }
         }
-        // Render UI based on current state.
         when (uiState) {
             is RepoUiState.Idle -> {
                 Text(text = "Enter a GitHub username to begin.", fontSize = 16.sp)

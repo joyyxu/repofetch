@@ -3,7 +3,6 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        // Required for the Compose Compiler when using dev builds
         maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
     }
 }
