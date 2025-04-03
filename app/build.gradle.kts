@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.stateflowexample"
+    namespace = "com.example.page"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.stateflowexample"
+        applicationId = "com.example.page"
         minSdk = 33
         targetSdk = 35
         versionCode = 1
